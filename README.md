@@ -39,3 +39,7 @@ python create_xpi.py
 Based on [zotero-plugin-template](https://github.com/windingwind/zotero-plugin-template).
 
 Author: **forxhunter**
+
+## License
+
+[Apache License 2.0](./LICENSE)
