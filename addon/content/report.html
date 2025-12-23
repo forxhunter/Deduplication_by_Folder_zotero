@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Duplicate Review</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; padding: 20px; }
+        .group { border: 1px solid #ddd; margin-bottom: 20px; padding: 10px; border-radius: 4px; }
+        .group-header { font-weight: bold; margin-bottom: 10px; background: #f5f5f5; padding: 5px; }
+        .item { padding: 5px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
+        .actions { margin-left: 10px; }
+        button { cursor: pointer; padding: 4px 8px; }
+        .merge-btn { background-color: #007bff; color: white; border: none; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <h1>Found Duplicates</h1>
+    <div id="container"></div>
+
+    <script>
+        const params = window.arguments ? window.arguments[0] : null;
+        const container = document.getElementById("container");
+
+        if (!params || !params.groups) {
+            container.innerText = "No data provided.";
+        } else {
+            const { groups, mergeCallback } = params;
+            
+            if (groups.length === 0) {
+                container.innerText = "No duplicates found.";
+            } else {
+                groups.forEach(group => {
+                    const groupDiv = document.createElement("div");
+                    groupDiv.className = "group";
+                    
+                    const header = document.createElement("div");
+                    header.className = "group-header";
+                    header.innerText = `${group.reason} (${group.items.length} items)`;
+                    
+                    // Merge Button
+                    const mergeBtn = document.createElement("button");
+                    mergeBtn.className = "merge-btn";
+                    mergeBtn.innerText = "Merge This Group";
+                    mergeBtn.onclick = () => {
+                         if (mergeCallback) {
+                             // Create simplified items list for callback (passing complex objects might be tricky across context?)
+                             // Actually, we pass the group signature/ID to the callback.
+                             mergeCallback(group.id);
+                             groupDiv.style.opacity = "0.5";
+                             mergeBtn.disabled = true;
+                             mergeBtn.innerText = "Merged";
+                         }
+                    };
+                    header.appendChild(mergeBtn);
+                    groupDiv.appendChild(header);
+
+                    group.items.forEach(item => {
+                        const itemDiv = document.createElement("div");
+                        itemDiv.className = "item";
+                        // We need titles. But 'item' here is Zotero.Item object.
+                        // Accessing it from this window (which is chrome-privileged hopefully) should work.
+                        // Or we passed simple objects?
+                        // We passed real objects.
+                        try {
+                             itemDiv.innerText = item.getField("title") + " (" + item.getField("date") + ")";
+                        } catch (e) {
+                            itemDiv.innerText = "Item " + item.id;
+                        }
+                        groupDiv.appendChild(itemDiv);
+                    });
+
+                    container.appendChild(groupDiv);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

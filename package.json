@@ -1,20 +1,20 @@
 {
-  "name": "zotero-plugin-template",
+  "name": "zotero-collections-deduplicator",
   "type": "module",
-  "version": "3.1.0",
-  "description": "Zotero Plugin Template",
+  "version": "1.0.0",
+  "description": "Deduplicate items within a specific collection in Zotero",
   "config": {
-    "addonName": "Zotero Plugin Template",
-    "addonID": "addontemplate@euclpts.com",
-    "addonRef": "addontemplate",
-    "addonInstance": "AddonTemplate",
-    "prefsPrefix": "extensions.zotero.addontemplate"
+    "addonName": "Zotero Collections Deduplicator",
+    "addonID": "zotero-collections-deduplicator@forxhunter",
+    "addonRef": "zoteroCollectionsDeduplicator",
+    "addonInstance": "ZoteroCollectionsDeduplicator",
+    "prefsPrefix": "extensions.zotero.zoteroCollectionsDeduplicator"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/windingwind/zotero-plugin-template.git"
   },
-  "author": "windingwind",
+  "author": "forxhunter",
   "bugs": {
     "url": "https://github.com/windingwind/zotero-plugin-template/issues"
   },

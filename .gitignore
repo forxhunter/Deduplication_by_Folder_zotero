@@ -14,3 +14,8 @@ tsconfig.tsbuildinfo
 .scaffold
 build
 logs
+
+# Builds
+*.xpi
+*.zip
+create_xpi.py
