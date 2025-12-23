@@ -27,7 +27,12 @@ Unlike the native "Duplicate Items" view which scans the entire library, this pl
 3. If duplicates are found, a window will appear listing them.
 4. Click **Merge This Group** to merge items.
 
+## Compile  
 
+```bash
+npm run build
+python create_xpi.py
+```
 
 ## Credits
 
